@@ -1,0 +1,54 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+ 
+ <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="inicial.faces">SCAP</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <!--  <li class="active"><a href="#">Home</a></li> -->              
+              <!--  <li><a href="#contact">Contact</a></li> -->
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Cadastros<b class="caret"></b></a>
+                <ul class="dropdown-menu">                  
+                  <li><a href="CadastroPessoaForm.faces">Cadastrar Usuário</a></li>
+                  <li><a href="CadastroChefeDepartamentoForm.faces">Cadastrar Chefe de Departamento</a></li>
+                  <li class="divider"></li>                  
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Secretaria<b class="caret"></b></a>
+                <ul class="dropdown-menu">                  
+                  <li><a href="CadastroPessoaForm.faces">Cadastrar Parecer</a></li>
+                  <li><a href="CadastrarChefeDepartamentoForm.faces">Cadastrar Parecer DI</a></li>                  
+                </ul>
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Afastamentos<b class="caret"></b></a>
+                <ul class="dropdown-menu">                  
+                  <li><a href="SolicitacaoAfastamentoForm.faces">Solicitar Afastamento</a></li>
+                  <li><a href="ManifestarSolicitacaoForm.faces">Manifestar-se Contra Afastamento</a></li>
+                  <li><a href="ConsultarSolicitacaoForm.faces">Consultar Solicitação</a></li>
+                  <li><a href="DeferirParecerForm.faces">Deferir Parecer</a></li>                                    
+                </ul>
+              </li>
+            </ul>            
+          </div>
+        </div>
+      </div>
+    </div> 
+ 
+    
+    
+</ui:composition>
+
+

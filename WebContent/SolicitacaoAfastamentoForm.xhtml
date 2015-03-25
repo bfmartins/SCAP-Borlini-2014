@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+<h:head>	
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+
+    <meta charset="utf-8"></meta>
+    <title>SCAP - Sistema de Controle de Afastamento de Professores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content="Sistema de Afastamento de Professores"></meta>
+    <meta name="author" content="Bruno Borlini Duarte"></meta>
+    
+    <!-- styles -->
+    <link href="bootstrap_files/bootstrap.css" rel="stylesheet"></link>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+    </style>
+    <link href="bootstrap_files/bootstrap-responsive.css" rel="stylesheet"></link>
+
+
+</h:head>
+<h:body>
+
+
+<div id="header">
+<ui:include src="header.xhtml" />
+ </div>
+
+
+ <div class="container"> 
+     
+        <h:form id="frmCadastrarSolicitacaoAfastamento">		
+				
+			Nome do Evento:* 
+			<p:inputText id="txtbox_nomeEvento" label="Evento" value="#{CadastroSolicitacaoFormBean.solicitacao.nm_evento}" required="true" >
+				<f:validateLength minimum="2" />
+			</p:inputText><br />
+			
+			Data de Inicio do Evento:* 
+			<p:inputMask id="txtbox_dtInicioEvento"  mask="99/99/9999" value="#{CadastroSolicitacaoFormBean.solicitacao.dt_inievento}" required="true" >
+				<f:validateLength minimum="2" />
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/> 
+			</p:inputMask><br />
+			
+			Data de Fim do Evento:* 
+			<p:inputMask id="txtbox_dtFimEvento"  mask="99/99/9999" value="#{CadastroSolicitacaoFormBean.solicitacao.dt_fimevento}" required="true" >
+				<f:validateLength minimum="2" />
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/> 
+			</p:inputMask><br />
+			
+			Cidade:* 
+			<p:inputText id="txtbox_cidade" label="Cidade" value="#{CadastroSolicitacaoFormBean.solicitacao.nm_cidade}" required="true" >
+				<f:validateLength minimum="2" />				
+			</p:inputText><br />
+			
+			Data de Inicio do Afastamento:* 
+			<p:inputMask id="txtbox_dtInicioAfastamento"  mask="99/99/9999" value="#{CadastroSolicitacaoFormBean.solicitacao.dt_iniAfast}" required="true" >
+				<f:validateLength minimum="2" />
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/> 
+			</p:inputMask><br />
+			
+			Data de Fim do Afastamento:* 
+			<p:inputMask id="txtbox_dtFimAfastamento"  mask="99/99/9999" value="#{CadastroSolicitacaoFormBean.solicitacao.dt_fimAfast}" required="true" >			
+				<f:validateLength minimum="2" />
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/> 
+			</p:inputMask><br />
+			
+			Tipo de Afastamento:*
+			<p:selectOneMenu  id="combobox_tipoAfastamento" value="#{CadastroSolicitacaoFormBean.solicitacao.tipoAfastamento}" >
+				<f:selectItem itemLabel="Selecione" itemValue="SELECIONE" />            	 
+            	 <f:selectItem itemLabel="Nacional" itemValue="NACIONAL" />
+            	 <f:selectItem itemLabel="Internacional" itemValue="INTERNACIONAL" />            
+        	</p:selectOneMenu><br />
+        			
+			Onus:*
+			<p:selectOneMenu id="combobox_onus" value="#{CadastroSolicitacaoFormBean.solicitacao.onus}" >
+			<f:selectItem itemLabel="Selecione" itemValue="SELECIONE" />  
+            <f:selectItem itemLabel="Inexistente" itemValue="INEXISTENTE" />  
+            <f:selectItem itemLabel="Parcial" itemValue="PARCIAL" />  
+            <f:selectItem itemLabel="Total" itemValue="TOTAL" /> 
+        	</p:selectOneMenu><br />
+        	
+        	
+			
+			<p:commandButton actionListener="#{CadastroSolicitacaoFormBean.onbtnCadastrar}" ajax="false" value="Cadastrar Solicitação" icon="buttonOk" process="@all"  styleClass="ui-priority-primary" />
+			<p:messages id="dt_messages" showDetail="true" autoUpdate="true" closable="true" />
+		</h:form> 
+		
+	
+ </div> 
+
+	<!--javascript -->    
+	<!-- Biblioteca jquery deve ficar desabilidata pois buga o selectOneMenu -->
+    <!--<script src="bootstrap_files/jquery.js"></script> -->
+    <script src="bootstrap_files/bootstrap-transition.js"></script>
+    <script src="bootstrap_files/bootstrap-alert.js"></script>
+    <script src="bootstrap_files/bootstrap-modal.js"></script>
+    <script src="bootstrap_files/bootstrap-dropdown.js"></script>
+    <script src="bootstrap_files/bootstrap-scrollspy.js"></script>
+    <script src="bootstrap_files/bootstrap-tab.js"></script>
+    <script src="bootstrap_files/bootstrap-tooltip.js"></script>
+    <script src="bootstrap_files/bootstrap-popover.js"></script>
+    <script src="bootstrap_files/bootstrap-button.js"></script>
+    <script src="bootstrap_files/bootstrap-collapse.js"></script>
+    <script src="bootstrap_files/bootstrap-carousel.js"></script>
+    <script src="bootstrap_files/bootstrap-typeahead.js"></script>
+
+</h:body>
+</html>

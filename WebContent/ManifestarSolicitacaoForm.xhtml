@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+<h:head>	
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+
+    <meta charset="utf-8"></meta>
+    <title>SCAP - Sistema de Controle de Afastamento de Professores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content="Sistema de Afastamento de Professores"></meta>
+    <meta name="author" content="Bruno Borlini Duarte"></meta>
+    
+    <!-- styles -->
+    <link href="bootstrap_files/bootstrap.css" rel="stylesheet"></link>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+    </style>
+    <link href="bootstrap_files/bootstrap-responsive.css" rel="stylesheet"></link>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+</h:head>
+<h:body>
+
+<div id="header">
+<ui:include src="header.xhtml" />
+</div>	
+ 
+ 
+ <h:form id="form">  
+ 
+  			<h:outputText value="Codigo da Solicitação:" />
+			<p:inputText id="txtbox_codSolicitacao" label="codigo" value="#{ManifestarSolicitacaoFormBean.codigo}"/><br />
+			
+		<h:outputText value="Solicitante: " />  
+        <p:selectOneMenu value="#{ManifestarSolicitacaoFormBean.professorSelecionado.cd_pessoa}" process="@this" >  
+           <f:selectItem itemLabel="Selecione" itemValue="" />  
+           <f:selectItems value="#{ManifestarSolicitacaoFormBean.professores}" var="prof"  itemValue="#{prof.cd_pessoa}"  itemLabel="#{prof.nome}" /> 
+        </p:selectOneMenu><br />		
+		
+		<p:commandButton actionListener="#{ManifestarSolicitacaoFormBean.onbtnPesquisar}" ajax="false" value="Pesquisar Solicitação" icon="buttonOk" process="@all"  styleClass="ui-priority-primary" /><br/>
+
+			
+			
+		<p:dataTable id="solicitacoes" var="solicitacao" value="#{ManifestarSolicitacaoFormBean.solicitacaoDM}" emptyMessage="Nenhum registro encontrado"  
+        	loadingMessage="Buscando..." paginator="true" rows="10" rowKey="#{solicitacao.cd_solicitacao}"  
+            selection="#{ManifestarSolicitacaoFormBean.solicitacaoSelecionada}">  
+  
+        <f:facet name="header">  
+            Afastamentos  
+        </f:facet>  
+  
+        <p:column selectionMode="single" style="width:2%" />  
+  
+          <p:column headerText="Codigo" style="width:10%">  
+            #{solicitacao.cd_solicitacao}  
+        </p:column>
+  
+        <p:column headerText="Tipo de Afastamento" style="width:20%">  
+            #{solicitacao.tipoAfastamento}  
+        </p:column>  
+  
+        <p:column headerText="Solicitante" style="width:20%">  
+            #{solicitacao.pessoa.nome}  
+        </p:column>
+        
+        <p:column headerText="Inicio" style="width:14%">  
+            #{solicitacao.dt_iniAfast}  
+        </p:column>
+        
+        <p:column headerText="Fim" style="width:14%">  
+            #{solicitacao.dt_fimAfast}  
+        </p:column>  
+  
+        <p:column headerText="Status" style="width:10%">  
+            #{solicitacao.statusSolicitacao}  
+        </p:column> 
+        
+        <p:column headerText="Onus" style="width:10%">  
+            #{solicitacao.onus}  
+        </p:column> 
+  
+        <f:facet name="footer">  
+            <p:commandButton id="manifestarButton" value="Manifestar-se" icon="ui-icon-search"   
+                             update=":form:displaySingle" oncomplete="PF('manifestacaoDialog').show()">
+            </p:commandButton> 
+                             
+                            
+        </f:facet> 
+       
+    </p:dataTable>
+    
+    <p:dialog id="dialog" header="Manifestar-se Contra Afastamento" widgetVar="manifestacaoDialog" resizable="true"  
+              showEffect="fade" hideEffect="explode">  
+  
+        <h:panelGrid id="displaySingle" columns="2" cellpadding="4">  
+  
+            <f:facet name="header">  
+               
+            </f:facet>  
+  
+            <h:outputText value="Codigo:" />  
+            <h:outputText value="#{ManifestarSolicitacaoFormBean.solicitacaoSelecionada.cd_solicitacao}" style="font-weight:bold"/>
+            
+            <h:outputText value="Solicitante:" />  
+            <h:outputText value="#{ManifestarSolicitacaoFormBean.solicitacaoSelecionada.pessoa.nome}" style="font-weight:bold"/>   
+  
+            <h:outputText value="Tipo de Afastamento:" />  
+            <h:outputText value="#{ManifestarSolicitacaoFormBean.solicitacaoSelecionada.tipoAfastamento}" style="font-weight:bold"/>  
+  
+            <h:outputText value="Inicio:" />  
+            <h:outputText value="#{ManifestarSolicitacaoFormBean.solicitacaoSelecionada.dt_iniAfast}" style="font-weight:bold"/>  
+  
+            <h:outputText value="Fim:" />  
+            <h:outputText value="#{ManifestarSolicitacaoFormBean.solicitacaoSelecionada.dt_fimAfast}" style="font-weight:bold"/>
+            
+            <h:outputText value="Status:" />  
+            <h:outputText value="#{ManifestarSolicitacaoFormBean.solicitacaoSelecionada.statusSolicitacao}" style="font-weight:bold"/>
+            
+            <h:outputText value="Onus:" />  
+            <h:outputText value="#{ManifestarSolicitacaoFormBean.solicitacaoSelecionada.onus}" style="font-weight:bold"/>           
+            
+            <h:outputText value="Motivo:" /> 
+            <p:inputTextarea value="#{ManifestarSolicitacaoFormBean.motivoManifestacao}" rows="5" cols="50" counter="counter" counterTemplate="{0} characters remaining." maxlength="1024" autoResize="false"/><br />
+            <h:outputText id="counter" /><br />
+            
+            <p:commandButton actionListener="#{ManifestarSolicitacaoFormBean.onbtnParecer}" ajax="false" value="Enviar Parecer" icon="buttonOk" process="@all"  styleClass="ui-priority-primary" /><br/>
+            
+             
+        </h:panelGrid>  
+    </p:dialog>   			
+  	
+  	
+  	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+      
+
+ </h:form>
+ 
+ 
+ <!--javascript -->    
+	<!-- Biblioteca jquery deve ficar desabilidata pois buga o selectOneMenu -->
+    <!--<script src="bootstrap_files/jquery.js"></script> -->
+    <script src="bootstrap_files/bootstrap-transition.js"></script>
+    <script src="bootstrap_files/bootstrap-alert.js"></script>
+    <script src="bootstrap_files/bootstrap-modal.js"></script>
+    <script src="bootstrap_files/bootstrap-dropdown.js"></script>
+    <script src="bootstrap_files/bootstrap-scrollspy.js"></script>
+    <script src="bootstrap_files/bootstrap-tab.js"></script>
+    <script src="bootstrap_files/bootstrap-tooltip.js"></script>
+    <script src="bootstrap_files/bootstrap-popover.js"></script>
+    <script src="bootstrap_files/bootstrap-button.js"></script>
+    <script src="bootstrap_files/bootstrap-collapse.js"></script>
+    <script src="bootstrap_files/bootstrap-carousel.js"></script>
+    <script src="bootstrap_files/bootstrap-typeahead.js"></script>
+
+</h:body>
+</html>

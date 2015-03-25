@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+<h:head>	
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+
+    <meta charset="utf-8"></meta>
+    <title>SCAP - Sistema de Controle de Afastamento de Professores</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
+    <meta name="description" content="Sistema de Afastamento de Professores"></meta>
+    <meta name="author" content="Bruno Borlini Duarte"></meta>
+    
+    <!-- styles -->
+    <link href="bootstrap_files/bootstrap.css" rel="stylesheet"></link>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+    </style>
+    <link href="bootstrap_files/bootstrap-responsive.css" rel="stylesheet"></link>
+
+    
+</h:head>
+<h:body>
+
+<div id="header">
+<ui:include src="header.xhtml" />
+</div>	
+ 
+ 
+ <div class="container"> 
+ <h:form id="frmCadastrarChefeDepartamento">  
+ 
+  			
+		<h:outputText value="Professor:* " />  
+        <p:selectOneMenu value="#{CadastroChefeDepartamentoFormBean.codProfessorSelecionado}" process="@this" >  
+           <f:selectItem itemLabel="Selecione" itemValue="0" />  
+           <f:selectItems value="#{CadastroChefeDepartamentoFormBean.professores}" var="prof"  itemValue="#{prof.cd_pessoa}"  itemLabel="#{prof.nome}" /> 
+        </p:selectOneMenu><br />	
+        <h:outputText value="Data de Inicio:* " />
+        <p:inputMask id="txtbox_dt_iniMandato"  mask="99/99/9999" value="#{CadastroChefeDepartamentoFormBean.mandato.dt_iniMandato}" required="true" >
+				<f:validateLength minimum="2" />
+				<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/> 
+			</p:inputMask><br />	
+		
+		<p:commandButton actionListener="#{CadastroChefeDepartamentoFormBean.onbtnCadastrar}" ajax="false" value="Cadastrar" icon="buttonOk" process="@all"  styleClass="ui-priority-primary" /><br/>
+		
+		
+		<p:messages id="messageMandato" showDetail="true" autoUpdate="true" closable="true" />      
+
+ </h:form>
+ </div>
+ 
+ 
+ <!--javascript -->    
+	<!-- Biblioteca jquery deve ficar desabilidata pois buga o selectOneMenu -->
+    <!--<script src="bootstrap_files/jquery.js"></script> -->
+    <script src="bootstrap_files/bootstrap-transition.js"></script>
+    <script src="bootstrap_files/bootstrap-alert.js"></script>
+    <script src="bootstrap_files/bootstrap-modal.js"></script>
+    <script src="bootstrap_files/bootstrap-dropdown.js"></script>
+    <script src="bootstrap_files/bootstrap-scrollspy.js"></script>
+    <script src="bootstrap_files/bootstrap-tab.js"></script>
+    <script src="bootstrap_files/bootstrap-tooltip.js"></script>
+    <script src="bootstrap_files/bootstrap-popover.js"></script>
+    <script src="bootstrap_files/bootstrap-button.js"></script>
+    <script src="bootstrap_files/bootstrap-collapse.js"></script>
+    <script src="bootstrap_files/bootstrap-carousel.js"></script>
+    <script src="bootstrap_files/bootstrap-typeahead.js"></script>
+
+</h:body>
+</html>
